@@ -22,7 +22,7 @@ steps:
     arguments: '-S $(ServerName) -U $(AdminUser) -P $(AdminPassword) -d $(DatabaseName) -i $(SQLFile)'
 
 - task: AzurePowerShell@2
-  displayName: Azure PowerShell script: FilePath
+  displayName: Azure PowerShell script - build.yaml
   inputs:
     azureSubscription: '$(AzureSubscription)'
     ScriptPath: '$(Build.SourcesDirectory)\scripts\RemoveAzureFirewallRule.ps1'
