@@ -1,5 +1,5 @@
 variables:
-  AzureSubscription: '51af872a-b560-413b-bb0f-8a11e0f8ce64'
+  AzureSubscription: 'KCA2 Azure Test&Dev (S03)'
   ServerName: 'ss-ias-uks-neilm.database.windows.net'
   DatabaseName: 'dbs-s03-uks-test-1'
   AdminUser: 'globaladmin'
@@ -8,7 +8,7 @@ variables:
 
 steps:
 - task: AzurePowerShell@2
-  displayName: Azure PowerShell script: FilePath
+  displayName: Azure PowerShell script - build.yaml
   inputs:
     azureSubscription: '$(AzureSubscription)'
     ScriptPath: '$(Build.SourcesDirectory)\scripts\SetAzureFirewallRule.ps1'
@@ -22,7 +22,7 @@ steps:
     arguments: '-S $(ServerName) -U $(AdminUser) -P $(AdminPassword) -d $(DatabaseName) -i $(SQLFile)'
 
 - task: AzurePowerShell@2
-  displayName: Azure PowerShell script: FilePath
+  displayName: Azure PowerShell script - build.yaml
   inputs:
     azureSubscription: '$(AzureSubscription)'
     ScriptPath: '$(Build.SourcesDirectory)\scripts\RemoveAzureFirewallRule.ps1'
