@@ -8,7 +8,7 @@ variables:
 
 steps:
 - task: AzurePowerShell@2
-  displayName: Azure PowerShell script: FilePath
+  displayName: Azure PowerShell script - build.yaml
   inputs:
     azureSubscription: '$(AzureSubscription)'
     ScriptPath: '$(Build.SourcesDirectory)\scripts\SetAzureFirewallRule.ps1'
