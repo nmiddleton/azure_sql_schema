@@ -1,29 +1,30 @@
-# Azure SQL Database Deployment
-# Deploy Azure SQL DB using DACPAC or run scripts using SQLCMD
-- task: SqlAzureDacpacDeployment@1
+variables:
+  AzureSubscription: '51af872a-b560-413b-bb0f-8a11e0f8ce64'
+  ServerName: 'ss-ias-uks-neilm.database.windows.net'
+  DatabaseName: 'dbs-s03-uks-test-1'
+  AdminUser: 'globaladmin'
+  AdminPassword: 'SQL_Admin1!'
+  SQLFile: 'script.sql'
+
+steps:
+- task: AzurePowerShell@2
+  displayName: Azure PowerShell script: FilePath
   inputs:
-    azureConnectionType: 'ConnectedServiceNameARM' # Optional. Options: connectedServiceName, connectedServiceNameARM
-    #azureClassicSubscription: # Required when azureConnectionType == ConnectedServiceName
-    azureSubscription: '51af872a-b560-413b-bb0f-8a11e0f8ce64' # Required when azureConnectionType == ConnectedServiceNameARM
-    authenticationType: 'server' # Options: server, aadAuthenticationPassword, aadAuthenticationIntegrated, connectionString
-    serverName: 'ss-ias-uks-neilm.database.windows.net' # Required when authenticationType == Server || AuthenticationType == AadAuthenticationPassword || AuthenticationType == AadAuthenticationIntegrated
-    databaseName: 'dbs-s03-uks-test-1' # Required when authenticationType == Server || AuthenticationType == AadAuthenticationPassword || AuthenticationType == AadAuthenticationIntegrated
-    sqlUsername: 'globaladmin' # Required when authenticationType == Server
-    sqlPassword: 'SQL_Admin1!' # Required when authenticationType == Server
-    #aadSqlUsername: # Required when authenticationType == AadAuthenticationPassword
-    #aadSqlPassword: # Required when authenticationType == AadAuthenticationPassword
-    #connectionString: # Required when authenticationType == ConnectionString
-    deployType: 'sqlTask' # Options: dacpacTask, sqlTask, inlineSqlTask
-    #deploymentAction: 'Publish' # Required when deployType == DacpacTask. Options: publish, extract, export, import, script, driftReport, deployReport
-    #dacpacFile: # Required when deploymentAction == Publish || DeploymentAction == Script || DeploymentAction == DeployReport
-    #bacpacFile: # Required when deploymentAction == Import
-    sqlFile: 'script.sql' # Required when deployType == SqlTask
-    #sqlInline: # Required when deployType == InlineSqlTask
-    #publishProfile: # Optional
-    #additionalArguments: # Optional
-    #sqlAdditionalArguments: # Optional
-    #inlineAdditionalArguments: # Optional
-    ipDetectionMethod: 'AutoDetect' # Options: autoDetect, iPAddressRange
-    #startIpAddress: # Required when ipDetectionMethod == IPAddressRange
-    #endIpAddress: # Required when ipDetectionMethod == IPAddressRange
-    #deleteFirewallRule: true # Optional
+    azureSubscription: '$(AzureSubscription)'
+    ScriptPath: '$(Build.SourcesDirectory)\scripts\SetAzureFirewallRule.ps1'
+    ScriptArguments: '$(ServerName)'
+    azurePowerShellVersion: LatestVersion
+
+- task: CmdLine@1
+  displayName: Run Sqlcmd
+  inputs:
+    filename: Sqlcmd
+    arguments: '-S $(ServerName) -U $(AdminUser) -P $(AdminPassword) -d $(DatabaseName) -i $(SQLFile)'
+
+- task: AzurePowerShell@2
+  displayName: Azure PowerShell script: FilePath
+  inputs:
+    azureSubscription: '$(AzureSubscription)'
+    ScriptPath: '$(Build.SourcesDirectory)\scripts\RemoveAzureFirewallRule.ps1'
+    ScriptArguments: '$(ServerName)'
+    azurePowerShellVersion: LatestVersion
