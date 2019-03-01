@@ -6,7 +6,7 @@ param
 )
 
 $ErrorActionPreference = 'Stop'
-Set-AzureSubscription -SubscriptionId '51af872a-b560-413b-bb0f-8a11e0f8ce64'
+Set-AzureSubscription -SubscriptionId 'Klaim Test&Dev'
 
 function New-AzureSQLServerFirewallRule {
   $agentIP = (New-Object net.webclient).downloadstring("http://checkip.dyndns.com") -replace "[^\d\.]"
