@@ -6,15 +6,15 @@ param
 )
 
 $ErrorActionPreference = 'Stop'
-Set-AzureSubscription -SubscriptionId 'Klaim Test&Dev'
+Select-AzContext "Klaim Test&Dev"
 
 function New-AzureSQLServerFirewallRule {
   $agentIP = (New-Object net.webclient).downloadstring("http://checkip.dyndns.com") -replace "[^\d\.]"
-  New-AzureSqlDatabaseServerFirewallRule -StartIPAddress $agentIp -EndIPAddress $agentIp -RuleName $AzureFirewallName -ServerName $ServerName
+  New-AzSqlDatabaseServerFirewallRule -StartIPAddress $agentIp -EndIPAddress $agentIp -FireWallRuleName $AzureFirewallName -ServerName $ServerName
 }
 function Update-AzureSQLServerFirewallRule{
   $agentIP= (New-Object net.webclient).downloadstring("http://checkip.dyndns.com") -replace "[^\d\.]"
-  Set-AzureSqlDatabaseServerFirewallRule -StartIPAddress $agentIp -EndIPAddress $agentIp -RuleName $AzureFirewallName -ServerName $ServerName
+  Set-AzSqlServerFirewallRule -StartIPAddress $agentIp -EndIPAddress $agentIp -RuleName $AzureFirewallName -ServerName $ServerName
 }
 
 If ((Get-AzureSqlDatabaseServerFirewallRule -ServerName $ServerName -RuleName $AzureFirewallName -ErrorAction SilentlyContinue) -eq $null)
