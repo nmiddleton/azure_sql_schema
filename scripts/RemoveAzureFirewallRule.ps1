@@ -9,6 +9,5 @@ $ErrorActionPreference = 'Stop'
 
 If ((Get-AzureSqlDatabaseServerFirewallRule -ServerName $ServerName -RuleName $AzureFirewallName -ErrorAction SilentlyContinue))
 {
-  Select-AzContext "Klaim Test&Dev"
-  Remove-AzSqlDatabaseServerFirewallRule -RuleName $AzureFirewallName -ServerName $ServerName
+  Remove-AzureSqlDatabaseServerFirewallRule -RuleName $AzureFirewallName -ServerName $ServerName
 }
