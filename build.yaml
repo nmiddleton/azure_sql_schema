@@ -13,7 +13,7 @@ steps:
     inputs:
       azureSubscription: '$(AzureSubscription)'
       ScriptPath: '$(Build.SourcesDirectory)\scripts\SetAzureFirewallRule.ps1'
-      ScriptArguments: '$(ServerName)'
+      ScriptArguments: '$(ServerName) $(ResourceGroupName)'
       azurePowerShellVersion: LatestVersion
 
   - task: SqlAzureDacpacDeployment@1
@@ -31,6 +31,6 @@ steps:
     inputs:
       azureSubscription: '$(AzureSubscription)'
       ScriptPath: '$(Build.SourcesDirectory)\scripts\RemoveAzureFirewallRule.ps1'
-      ScriptArguments: '$(ServerName)'
+      ScriptArguments: '$(ServerName)  $(ResourceGroupName)'
       azurePowerShellVersion: LatestVersion
 
