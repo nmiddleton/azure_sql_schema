@@ -7,7 +7,7 @@ param
 
 $ErrorActionPreference = 'Stop'
 
-If ((Get-AzureSqlDatabaseServerFirewallRule -ResourceGroupName 'IaC_Sandbox' -ServerName $ServerName -RuleName $AzureFirewallName -ErrorAction SilentlyContinue))
+If ((Get-AzureSqlDatabaseServerFirewallRule -ServerName $ServerName -RuleName $AzureFirewallName -ErrorAction SilentlyContinue))
 {
-  Remove-AzureSqlDatabaseServerFirewallRule -ResourceGroupName 'IaC_Sandbox' -RuleName $AzureFirewallName -ServerName $ServerName
+  Remove-AzureSqlDatabaseServerFirewallRule -RuleName $AzureFirewallName -ServerName $ServerName
 }
