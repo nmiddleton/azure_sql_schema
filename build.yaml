@@ -8,7 +8,7 @@ variables:
 
 steps:
   - task: AzurePowerShell@2
-    displayName: Azure PowerShell script: FilePath
+    displayName: Azure PowerShell script - FilePath
     inputs:
       azureSubscription: '$(AzureSubscription)'
       ScriptPath: '$(Build.SourcesDirectory)\scripts\SetAzureFirewallRule.ps1'
@@ -26,7 +26,7 @@ steps:
       DacpacFile: '$(DACPACFile)'
 
   - task: AzurePowerShell@2
-    displayName: Azure PowerShell script: FilePath
+    displayName: Azure PowerShell script - FilePath
     inputs:
       azureSubscription: '$(AzureSubscription)'
       ScriptPath: '$(Build.SourcesDirectory)\scripts\RemoveAzureFirewallRule.ps1'
