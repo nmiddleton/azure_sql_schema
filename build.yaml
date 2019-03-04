@@ -4,13 +4,15 @@ variables:
   DatabaseName: 'dbs-s03-uks-test-1'
   AdminUser: 'globaladmin'
   AdminPassword: 'SQL_Admin1!'
-  SQLFile: 'script.sql'
+  DACPACFile: 'azure_sqltest.dacpac'
 
 steps:
-- task: CmdLine@1
-  displayName: Run Sqlcmd
+- task: SqlAzureDacpacDeployment@1
+  displayName: Execute Azure SQL: DacpacTask
   inputs:
-    filename: Sqlcmd
-    arguments: '-S $(ServerName) -U $(AdminUser) -P $(AdminPassword) -d $(DatabaseName) -i $(SQLFile)'
-
-
+    azureSubscription: '$(AzureSubscription)'
+    ServerName: '$(ServerName)'
+    DatabaseName: '$(DatabaseName)'
+    SqlUsername: '$(AdminUser)'
+    SqlPassword: '-P $(AdminPassword)'
+    DacpacFile: '$(DACPACFile)'
