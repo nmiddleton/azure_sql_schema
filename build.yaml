@@ -1,6 +1,7 @@
 variables:
   AzureSubscription: 'KCA2 Azure Test&Dev (S03)'
   ServerName: 'ss-ias-uks-neilm'
+  ServerNameFQDN: 'ss-ias-uks-neilm.database.windows.net'
   ResourceGroupName: 'IaC_Sandbox'
   DatabaseName: 'dbs-s03-uks-test-1'
   AdminUser: 'globaladmin'
@@ -20,7 +21,7 @@ steps:
     displayName: Execute Azure SQL - DacpacTask
     inputs:
       azureSubscription: '$(AzureSubscription)'
-      ServerName: '$(ServerName)'
+      ServerName: '$(ServerNameFQDN)'
       DatabaseName: '$(DatabaseName)'
       SqlUsername: '$(AdminUser)'
       SqlPassword: '-P $(AdminPassword)'
