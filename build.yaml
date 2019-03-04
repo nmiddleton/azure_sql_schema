@@ -7,20 +7,29 @@ variables:
   DACPACFile: 'azure_sqltest.dacpac'
 
 steps:
-- task: AzurePowerShell@2
-  displayName: Azure PowerShell script - FilePath
-  inputs:
-    azureSubscription: '$(AzureSubscription)'
-    ScriptPath: '$(Build.SourcesDirectory)\scripts\SetAzureFirewallRule.ps1'
-    ScriptArguments: '$(ServerName)'
-    azurePowerShellVersion: LatestVersion
+  - task: AzurePowerShell@2
+    displayName: Azure PowerShell script: FilePath
+    inputs:
+      azureSubscription: '$(AzureSubscription)'
+      ScriptPath: '$(Build.SourcesDirectory)\scripts\SetAzureFirewallRule.ps1'
+      ScriptArguments: '$(ServerName)'
+      azurePowerShellVersion: LatestVersion
 
-- task: SqlAzureDacpacDeployment@1
-  displayName: Execute Azure SQL - DacpacTask
-  inputs:
-    azureSubscription: '$(AzureSubscription)'
-    ServerName: '$(ServerName)'
-    DatabaseName: '$(DatabaseName)'
-    SqlUsername: '$(AdminUser)'
-    SqlPassword: '-P $(AdminPassword)'
-    DacpacFile: '$(DACPACFile)'
+  - task: SqlAzureDacpacDeployment@1
+    displayName: Execute Azure SQL - DacpacTask
+    inputs:
+      azureSubscription: '$(AzureSubscription)'
+      ServerName: '$(ServerName)'
+      DatabaseName: '$(DatabaseName)'
+      SqlUsername: '$(AdminUser)'
+      SqlPassword: '-P $(AdminPassword)'
+      DacpacFile: '$(DACPACFile)'
+
+  - task: AzurePowerShell@2
+    displayName: Azure PowerShell script: FilePath
+    inputs:
+      azureSubscription: '$(AzureSubscription)'
+      ScriptPath: '$(Build.SourcesDirectory)\scripts\RemoveAzureFirewallRule.ps1'
+      ScriptArguments: '$(ServerName)'
+      azurePowerShellVersion: LatestVersion
+
