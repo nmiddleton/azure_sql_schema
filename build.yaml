@@ -7,7 +7,15 @@ variables:
   DACPACFile: 'azure_sqltest.dacpac'
 
 steps:
-- task: SqlAzureDacpacDeployment@1
+  - task: AzurePowerShell@2
+    displayName: Azure PowerShell script - FilePath
+    inputs:
+      azureSubscription: '$(AzureSubscription)'
+      ScriptPath: '$(Build.SourcesDirectory)\scripts\SetAzureFirewallRule.ps1'
+      ScriptArguments: '$(ServerName)'
+      azurePowerShellVersion: LatestVersion
+
+  - task: SqlAzureDacpacDeployment@1
   displayName: Execute Azure SQL - DacpacTask
   inputs:
     azureSubscription: '$(AzureSubscription)'
