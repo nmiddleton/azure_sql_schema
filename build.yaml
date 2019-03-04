@@ -1,7 +1,7 @@
 variables:
   AzureSubscription: 'KCA2 Azure Test&Dev (S03)'
   ServerName: 'ss-ias-uks-neilm.database.windows.net'
-  ResourceGRoupName: 'IaC_Sandbox'
+  ResourceGroupName: 'IaC_Sandbox'
   DatabaseName: 'dbs-s03-uks-test-1'
   AdminUser: 'globaladmin'
   AdminPassword: 'SQL_Admin1!'
