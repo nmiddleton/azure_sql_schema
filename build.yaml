@@ -7,7 +7,7 @@ variables:
   SQLFile: 'script.sql'
 
 steps:
-- task: AzurePowerShell@4
+- task: AzurePowerShell@2
   displayName: Azure PowerShell script - build.yaml
   inputs:
     azureSubscription: '$(AzureSubscription)'
@@ -21,7 +21,7 @@ steps:
     filename: Sqlcmd
     arguments: '-S $(ServerName) -U $(AdminUser) -P $(AdminPassword) -d $(DatabaseName) -i $(SQLFile)'
 
-- task: AzurePowerShell@4
+- task: AzurePowerShell@2
   displayName: Azure PowerShell script - build.yaml
   inputs:
     azureSubscription: '$(AzureSubscription)'
