@@ -8,7 +8,7 @@ variables:
 
 steps:
 - task: SqlAzureDacpacDeployment@1
-  displayName: Execute Azure SQL: DacpacTask
+  displayName: Execute Azure SQL - DacpacTask
   inputs:
     azureSubscription: '$(AzureSubscription)'
     ServerName: '$(ServerName)'
