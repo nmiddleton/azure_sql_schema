@@ -24,7 +24,7 @@ steps:
       ServerName: '$(ServerNameFQDN)'
       DatabaseName: '$(DatabaseName)'
       SqlUsername: '$(AdminUser)'
-      SqlPassword: '-P $(AdminPassword)'
+      SqlPassword: '$(AdminPassword)'
       DacpacFile: '$(DACPACFile)'
 
   - task: AzurePowerShell@2
