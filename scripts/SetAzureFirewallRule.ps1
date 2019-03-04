@@ -4,8 +4,8 @@ param
     [String] [Parameter(Mandatory = $true)] $ServerName,
     [String] $AzureFirewallName = "AzureWebAppFirewall"
 )
-
-$ErrorActionPreference = 'Stop'
+Add-AzureAccount
+#$ErrorActionPreference = 'Stop'
 
 function New-AzureSQLServerFirewallRule {
     $agentIP = (New-Object net.webclient).downloadstring("http://checkip.dyndns.com") -replace "[^\d\.]"
