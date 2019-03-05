@@ -1,5 +1,5 @@
 variables:
-  AzureSubscription: 'KCA2 Azure Test&Dev (S03)'
+  AzureSubscription: 'ICA in Klaim Test&Dev (S03)'
   ServerName: 'ss-ias-uks-neilm'
   ServerNameFQDN: 'ss-ias-uks-neilm.database.windows.net'
   ResourceGroupName: 'IaC_Sandbox'
